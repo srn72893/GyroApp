@@ -9,11 +9,11 @@ const COOLDOWN = 500;       //500ms 間隔で 1 回カウント
 const shakeBtn = document.getElementById('shake');
 //押されたら
 shakeBtn.addEventListener('click', async () => {
-    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    if (typeof DeviceMotionEvent.requestPermission === "function") {
         //アクセス許可されるまで待つ
         const res = await DeviceMotionEvent.requestPermission();
         //許可なければ終了
-        if (res !== "granted") return ;
+        if (res !== "granted") return;
     }
 
     //モーションイベント開始
@@ -32,11 +32,11 @@ function handleMotion(event) {
     const y = acc.y || 0;
     const z = acc.z || 0;
     //3 方向ベクトルを合成
-    const totalRotation = Math.sqrt(x*x + y*y + z*z);
+    const totalAcceleration = Math.sqrt(x*x + y*y + z*z);
     const now = Date.now();
 
     //ベクトル値が閾値を超えた && 前回の値取得から 500ms の時間経った
-    if (totalRotation > SHAKE_THRESHOLD && (now - lastShake) > COOLDOWN) {
+    if (totalAcceleration > SHAKE_THRESHOLD && (now - lastShake) > COOLDOWN) {
         shakeCount++;
         lastShake = now;
         document.getElementById('count').innerText = shakeCount;

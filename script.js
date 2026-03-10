@@ -3,11 +3,11 @@ const startBut = document.getElementById("start");
 
 //ボタンが押されたら中の処理を実行
 startBut.addEventListener("click", async () => {
-    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    if (typeof DeviceMotionEvent.requestPermission === "function") {
         //アクセス許可されるまで待つ
         const res = await DeviceMotionEvent.requestPermission();
         //許可なければ終了
-        if (res !== "granted") return ;
+        if (res !== "granted") return;
     }
 
     //センサーイベントを取得し、表示する
