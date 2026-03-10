@@ -1,4 +1,5 @@
-
+let shakeCount = 0;         //スマホを振った回数
+let lastShake = 0;          //前回スマホを振った時間
 
 //id="shake" ボタン要素取得
 const shakeBtn = document.getElementById('shake');
@@ -25,8 +26,6 @@ shakeBtn.addEventListener('click', async () => {
  * @returns 
  */
 function handleMotion(event) {
-    let shakeCount = 0;         //スマホを振った回数
-    let lastShake = 0;          //前回スマホを振った時間
     const SHAKE_THRESHOLD = 25; //閾値（超えた時 1 カウントとする）
     const COOLDOWN = 500;       //500ms 間隔で 1 回カウント計測
 
