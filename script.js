@@ -1,3 +1,5 @@
+console.log("version 1.0");
+
 //id="start" のボタン要素を取得
 const startBut = document.getElementById("start");
 
@@ -6,9 +8,6 @@ startBut.addEventListener("click", async () => {
     if (typeof DeviceMotionEvent.requestPermission === "function") {
         //アクセス許可されるまで待つ
         const res = await DeviceMotionEvent.requestPermission();
-
-        //デバッグ用
-        console.log("permission : ", res);
 
         //許可なければ終了
         if (res !== "granted") return;
