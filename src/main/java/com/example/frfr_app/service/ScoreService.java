@@ -11,8 +11,6 @@ import com.example.frfr_app.repository.ScoreRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
 @Service
 public class ScoreService {
     private final ScoreRepository repository;
@@ -52,8 +50,8 @@ public class ScoreService {
      * ランキングを取得する
      * @return
      */
-    public List<Score> getRaking() {
-        return repository.findTop5ByOrderByScoreDexc();
+    public List<Score> getRanking() {
+        return repository.findTop5ByOrderByScoreDesc();
     }
 
     /**
@@ -62,6 +60,6 @@ public class ScoreService {
      */
     @Transactional
     public void saveComment(CommentRequest request) {
-        Score score = repository.fintById(request.getScoreId());
+        Score score = repository.findById(request.getScoreId()).orElseThrow();
     }
 }

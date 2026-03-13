@@ -1,18 +1,21 @@
 package com.example.frfr_app.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.frfr_app.dto.CommentRequest;
-import com.example.frfr_app.dto.CommentResponse;
 import com.example.frfr_app.dto.ScoreRequest;
 import com.example.frfr_app.dto.ScoreResponse;
 import com.example.frfr_app.service.ScoreService;
+import com.example.frfr_app.entity.Score;
 
-@Controller
+@RestController
+@CrossOrigin
 public class ScoreController {
     private final ScoreService scoreService;
 
@@ -25,34 +28,30 @@ public class ScoreController {
      * @param request
      * @return
      */
-    @PostMapping("/score")
+    @PostMapping("/api/score")
     public ScoreResponse submitScore(@RequestBody ScoreRequest request) {
-        //TODO: フロントから受け取ったスコア関連データをServiceへ回す（DB参照）
-        // TOP5 ならコメント入力画面へ 
-        
-        return response;
+        return scoreService.submitScore(request);
     }
 
     /**
-     * コメント入力後、フロントからデータを受け取り Service に回す
+     * フロントからコメントデータを受け取り Service に回す
      * @param entity
      * @return
      */
-    @PostMapping("/comment")
-    public CommentResponse postMethodName(@RequestBody CommentRequest request) {
-        //TODO : TOP5 にランクインした人のコメントを処理
-        
-        return response;
+    @PostMapping("/api/comment")
+    public void comment(@RequestBody CommentRequest request) {
+        //コメントを DB に保存
+        scoreService.saveComment(request);
     }
     
     /**
-     * ランキング表示リクエストが来たら現在のランキングをフロントへ返す
+     * 現在のランキングをフロントへ返す
      * @param param
      * @return
      */
-    @GetMapping("/ranking")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+    @GetMapping("/api/ranking")
+    public List<Score> ranking() {
+        return scoreService.getRanking();
     }
     
 }

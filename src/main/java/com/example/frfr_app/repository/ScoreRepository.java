@@ -11,7 +11,7 @@ public interface ScoreRepository extends JpaRepository<Score, Long>{
      * SELECT * FROM scores ORDER BY score DESC LIMIT 5;
      * @return
      */
-    List<Score> findTop5ByOrderByScoreDexc();
+    List<Score> findTop5ByOrderByScoreDesc();
 
     /**
      * 入力されたスコアから順位を求める
