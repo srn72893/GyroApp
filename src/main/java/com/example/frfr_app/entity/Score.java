@@ -6,14 +6,18 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Score {
     @Id
+    @Getter
     @Column(name = "id")
     @GeneratedValue
     private Long id;        //主キー
 
+    @Setter
     @Column(name = "score")
     private double score;   //スコア
 
